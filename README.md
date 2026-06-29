@@ -1,2 +1,2 @@
 # calculator
-FInal foundation project: calculator
+Final foundation project: calculator
