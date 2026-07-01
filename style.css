@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    gap: 5px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -8,3 +7,14 @@ body {
     align-items: center;
 }
 
+.calculator {
+    background-color: whitesmoke;
+    border: 20px solid;
+}
+
+button {
+    width: 75px;
+    height: 75px;
+    color: whitesmoke;
+    background-color: navy;
+}
