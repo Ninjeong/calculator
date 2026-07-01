@@ -2,6 +2,7 @@ let leftOperand = "";
 let rightOperand = "";
 let operator = "";
 let operatorClicked = false;
+let resultDisplayed = false;
 
 const clearBtn = document.querySelector("#clearBtn");
 
@@ -65,6 +66,10 @@ function operate(leftOperand, operator, rightOperand) {
 }
 
 function appendDigit(digit) {
+    if (resultDisplayed) {
+        clear();
+        resultDisplayed = false;
+    }
     if (operatorClicked === false) {
         leftOperand += digit;
     }
@@ -76,6 +81,7 @@ function appendDigit(digit) {
 }
 
 function clear() {
+    resultDisplayed = false;
     leftOperand = "";
     rightOperand = "";
     operatorClicked = false;
@@ -84,6 +90,7 @@ function clear() {
 }
 
 function setOperator(operatorSymbol) {
+    resultDisplayed = false;
     if (leftOperand !== "" && rightOperand !== "") {
         // both numbers exist, calculate first
         leftOperand = String(operate(Number(leftOperand), operator, Number(rightOperand)));
@@ -96,24 +103,9 @@ function setOperator(operatorSymbol) {
 
 clearBtn.addEventListener("click", () => clear());
 
-oneBtn.addEventListener("click", () =>  {
-    if (operatorClicked === false && mainDisplay.textContent !== "") {
-        clear();
-    }
-    appendDigit("1");
-});
-twoBtn.addEventListener("click", () => {
-    if (operatorClicked === false && mainDisplay.textContent !== "") {
-        clear();
-    }
-    appendDigit("2");
-});
-threeBtn.addEventListener("click", () => {
-    if (operatorClicked === false && mainDisplay.textContent !== "") {
-        clear();
-    }
-    appendDigit("3");
-});
+oneBtn.addEventListener("click", () => appendDigit("1"));
+twoBtn.addEventListener("click", () => appendDigit("2"));
+threeBtn.addEventListener("click", () => appendDigit("3"));
 fourBtn.addEventListener("click", () => appendDigit("4"));
 fiveBtn.addEventListener("click", () => appendDigit("5"));
 sixBtn.addEventListener("click", () => appendDigit("6"));
@@ -131,6 +123,7 @@ divideBtn.addEventListener("click", () => setOperator("÷"));
 equalBtn.addEventListener("click", () => {
     if (leftOperand !== "" && rightOperand !== "" && operator !== "") {
         const result = parseFloat(operate(Number(leftOperand), operator, Number(rightOperand)).toFixed(10));
+        resultDisplayed = true;
         mainDisplay.textContent = result;
         leftOperand = String(parseFloat(result.toFixed(10)));
         rightOperand = "";
