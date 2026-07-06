@@ -3,6 +3,7 @@ let rightOperand = "";
 let operator = "";
 let operatorClicked = false;
 let resultDisplayed = false;
+let allowDecimal = true;
 
 const clearBtn = document.querySelector("#clearBtn");
 
@@ -81,6 +82,8 @@ function appendDigit(digit) {
 }
 
 function clear() {
+    allowDecimal = true;
+    decimalBtn.disabled = false;
     resultDisplayed = false;
     leftOperand = "";
     rightOperand = "";
@@ -91,6 +94,8 @@ function clear() {
 
 function setOperator(operatorSymbol) {
     resultDisplayed = false;
+    allowDecimal = true;          
+    decimalBtn.disabled = false;  
     if (leftOperand !== "" && rightOperand !== "") {
         // both numbers exist, calculate first
         leftOperand = String(operate(Number(leftOperand), operator, Number(rightOperand)));
@@ -113,7 +118,11 @@ sevenBtn.addEventListener("click", () => appendDigit("7"));
 eightBtn.addEventListener("click", () => appendDigit("8"));
 nineBtn.addEventListener("click", () => appendDigit("9"));
 zeroBtn.addEventListener("click", () => appendDigit("0"));
-decimalBtn.addEventListener("click", () => appendDigit("."));
+decimalBtn.addEventListener("click", () => {
+    appendDigit(".");
+    allowDecimal = false;
+    decimalBtn.disabled = true;
+});
 
 addBtn.addEventListener("click", () => setOperator("+"));
 subBtn.addEventListener("click", () => setOperator("-"));
