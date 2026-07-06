@@ -144,3 +144,20 @@ equalBtn.addEventListener("click", () => {
         clear();
     }
 });
+
+document.addEventListener("keydown", (e) => {
+    console.log(e.key);
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key >= "0" && e.key <= "9") {
+        appendDigit(e.key);
+    }
+    else if (e.key === ".") appendDigit(".");
+    else if (e.key === "+") setOperator("+");
+    else if (e.key === "-") setOperator("-");
+    else if (e.key === "*") setOperator("x");
+    else if (e.key === "/") setOperator("÷");
+    else if (e.key === "Enter") equalBtn.click();
+    else if (e.key === "Backspace") clear();
+});
